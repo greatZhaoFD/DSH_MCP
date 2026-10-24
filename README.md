@@ -26,6 +26,10 @@ The relay presents **seven MCP tools**: `dsh_list_sessions`, `dsh_models`, `dsh_
 
 Reports are written to `~/.dsh/dsh-mcp-relay/reports/<session-id-sha256>.json`, separately from native DSH conversation logs. A successful report call confirms durable storage only. It does not mean Codex has read or approved the report, and the agent should continue other authorized work. Reading reports does not delete them. This mailbox is not Codex’s native subagent mailbox and does not automatically wake a Codex conversation that has ended.
 
+## Communications viewer
+
+In DSH settings, open MCP Relay and choose **通信记录** next to a task. The host opens a one-time Markdown snapshot in VS Code, containing the retained task messages, assistant text, and durable reports. Tool calls/results and model reasoning are omitted; retained instruction and environment records are labeled by source. Closing that Markdown tab removes only its generated temporary file and folder, not the original DSH logs or report mailbox. The viewer needs VS Code; ordinary MCP delegation does not.
+
 ## Install and connect
 
 Clone `https://github.com/greatZhaoFD/dsh-mcp-relay` into a directory of your choice (the examples use `D:\plugins\dsh-mcp-relay`). Link that same checkout into the DSH profile as a bundle and preserve its `cordis.patch.yml` dependencies and `sessionMode: workspace`. Enable or reload the plugin in the DSH plugin manager, then reconnect the Codex MCP process so it loads this release’s tools and instructions. Markdown-only updates do not require a runtime reload. See [LOCAL-INSTALL.md](LOCAL-INSTALL.md) for portable installation steps for both ends.
