@@ -1,0 +1,25 @@
+# Dependencies and local caches
+node_modules/
+.pnpm-store/
+.report-test-*/
+.mailbox-integration-*/
+
+# Local backups and transient files
+*.bak*
+*.tmp
+*.log
+test/*-integration-result.json
+
+# Runtime state and credentials
+.env
+.env.*
+!.env.example
+connection.json
+preferences.json
+sessions.json
+reports/
+*.jsonl
+*.jsonl.zstd
+
+# Package previews
+*.tgz

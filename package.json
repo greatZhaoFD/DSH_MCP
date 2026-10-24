@@ -1,0 +1,70 @@
+{
+  "name": "dsh-mcp-relay",
+  "version": "0.7.0-mailbox.1",
+  "description": "Expose a running DeepSeek Harness instance over MCP, so an external agent can list, delegate to, and answer questions in that instance's own sessions.",
+  "type": "module",
+  "main": "lib/index.js",
+  "bin": {
+    "dsh-mcp-relay": "bin/dsh-mcp-relay.mjs"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json",
+    "./client": "./lib/client.js"
+  },
+  "files": [
+    "bin/dsh-mcp-relay.mjs",
+    "bin/relay-client.mjs",
+    "bin/surface.mjs",
+    "bin/surface.full.mjs",
+    "bin/dsh-bench.mjs",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md",
+    "LOCAL-INSTALL.md",
+    "AGENT-SETUP.md",
+    "LICENSE",
+    "lib/*.js",
+    "lib/*.mjs",
+    "lib/*.html",
+    "!lib/*.bak*"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-workspace"
+      ],
+      "platform": "web"
+    }
+  },
+  "scripts": {
+    "test": "node test/workspace.test.mjs && node test/model-selection.test.mjs && node test/waiting-takeover.test.mjs && node test/relay-client.test.mjs && node test/progress.test.mjs && node --test test/reporting.test.mjs test/mailbox-integration.test.mjs test/communications*.test.mjs"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "mcp",
+    "model-context-protocol",
+    "codex",
+    "agent",
+    "subagent"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greatZhaoFD/dsh-mcp-relay.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "homepage": "https://github.com/greatZhaoFD/dsh-mcp-relay#readme",
+  "bugs": {
+    "url": "https://github.com/greatZhaoFD/dsh-mcp-relay/issues"
+  }
+}
