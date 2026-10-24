@@ -14,9 +14,9 @@
  * tool calls that produced them. A Codex session is split across several
  * rollout files (one per segment), so pass the *directory* rather than a single
  * file: results are merged per session id. Codex reaches the dsh tools either
- * directly (`function_call` named `mcp__dsh__dsh_delegate`) or through its JS
+ * directly (`function_call` named `mcp__DSH_MCP__dsh_delegate`) or through its JS
  * sandbox (`custom_tool_call` named `exec`, whose source contains
- * `tools.mcp__dsh__dsh_delegate(...)`), so both forms are counted.
+ * `tools.mcp__DSH_MCP__dsh_delegate(...)`), so both forms are counted.
  *
  * The number that matters is requests-per-delegation: a blocking `wait: true`
  * delegation costs one request, an async one followed by polls costs one per

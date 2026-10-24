@@ -1,8 +1,8 @@
-# DSH MCP Relay
+# DSH_MCP
 
 [English](README.md) | [简体中文](README.zh.md) | [Local deployment](LOCAL-INSTALL.md) | [Tool registration and agent prompts](AGENT-SETUP.md)
 
-DSH MCP Relay exposes a running DeepSeek Harness (DSH) instance to an MCP client such as Codex. It creates or continues ordinary DSH workspace conversations, lets you inspect task status, and returns agent reports through a durable mailbox.
+DSH_MCP exposes a running DeepSeek Harness (DSH) instance to an MCP client such as Codex. It creates or continues ordinary DSH workspace conversations, lets you inspect task status, and returns agent reports through a durable mailbox.
 
 This repository contains the independently maintained fork at `0.7.0-mailbox.1`. It is based on the upstream `Nigheart/dsh-mcp-relay` project, with local changes for ordinary workspace sessions and mailbox reporting. Installing the upstream GitHub package alone does not install these local changes.
 
@@ -10,7 +10,7 @@ This repository contains the independently maintained fork at `0.7.0-mailbox.1`.
 
 | Component | Files | Installation |
 | --- | --- | --- |
-| Codex / MCP client end | `bin/dsh-mcp-relay.mjs`, `bin/relay-client.mjs`, `bin/surface*.mjs` | Configure an MCP stdio server using Node.js. |
+| Codex / MCP client end | `bin/DSH_MCP.mjs`, `bin/relay-client.mjs`, `bin/surface*.mjs` | Configure an MCP stdio server using Node.js. |
 | DSH host and UI end | `lib/index.js`, `lib/client.js`, `cordis.patch.yml` | Enable this same package in the DSH profile. |
 | DSH-local reporting tool | `lib/reporting.js`, `lib/reporting-prompt.js` | Registered by the host for Relay-managed sessions; no separate project or manual tool copy. |
 
@@ -28,24 +28,24 @@ Reports are written to `~/.dsh/dsh-mcp-relay/reports/<session-id-sha256>.json`, 
 
 ## Communications viewer
 
-In DSH settings, open MCP Relay and choose **通信记录** next to a task. The host opens a one-time Markdown snapshot in VS Code, containing the retained task messages, assistant text, and durable reports. Tool calls/results and model reasoning are omitted; retained instruction and environment records are labeled by source. Closing that Markdown tab removes only its generated temporary file and folder, not the original DSH logs or report mailbox. The viewer needs VS Code; ordinary MCP delegation does not.
+In DSH settings, open DSH_MCP and choose **通信记录** next to a task. The host opens a one-time Markdown snapshot in VS Code, containing the retained task messages, assistant text, and durable reports. Tool calls/results and model reasoning are omitted; retained instruction and environment records are labeled by source. Closing that Markdown tab removes only its generated temporary file and folder, not the original DSH logs or report mailbox. The viewer needs VS Code; ordinary MCP delegation does not.
 
 ## Install and connect
 
-Clone `https://github.com/greatZhaoFD/dsh-mcp-relay` into a directory of your choice (the examples use `D:\plugins\dsh-mcp-relay`). Link that same checkout into the DSH profile as a bundle and preserve its `cordis.patch.yml` dependencies and `sessionMode: workspace`. Enable or reload the plugin in the DSH plugin manager, then reconnect the Codex MCP process so it loads this release’s tools and instructions. Markdown-only updates do not require a runtime reload. See [LOCAL-INSTALL.md](LOCAL-INSTALL.md) for portable installation steps for both ends.
+Clone `https://github.com/greatZhaoFD/DSH_MCP` into a directory of your choice (the examples use `D:\plugins\DSH_MCP`). Link that same checkout into the DSH profile as a bundle and preserve its `cordis.patch.yml` dependencies and `sessionMode: workspace`. Enable or reload the plugin in the DSH plugin manager, then reconnect the Codex MCP process so it loads this release’s tools and instructions. Markdown-only updates do not require a runtime reload. See [LOCAL-INSTALL.md](LOCAL-INSTALL.md) for portable installation steps for both ends.
 
 The plugin writes its current loopback URL and authentication token to `~/.dsh/dsh-mcp-relay/connection.json` (or `$DSH_HOME/dsh-mcp-relay/connection.json` when `DSH_HOME` is set). Keep this file private. The recommended MCP configuration points the process to that file, so it follows the current port and token:
 
 Codex (`~/.codex/config.toml`), with paths adjusted for your machine:
 
 ```toml
-[mcp_servers.dsh]
+[mcp_servers.DSH_MCP]
 command = "node"
-args = ["D:/plugins/dsh-mcp-relay/bin/dsh-mcp-relay.mjs"]
+args = ["D:/plugins/DSH_MCP/bin/DSH_MCP.mjs"]
 startup_timeout_sec = 60
 tool_timeout_sec = 900
 
-[mcp_servers.dsh.env]
+[mcp_servers.DSH_MCP.env]
 DSH_RELAY_CONNECTION_FILE = "C:/Users/<you>/.dsh/dsh-mcp-relay/connection.json"
 ```
 

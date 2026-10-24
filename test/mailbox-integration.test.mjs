@@ -18,7 +18,7 @@ function deferred() {
 }
 
 function startMcp(url, workspace, token) {
-  const child = spawn(process.execPath, ['bin/dsh-mcp-relay.mjs'], {
+  const child = spawn(process.execPath, ['bin/DSH_MCP.mjs'], {
     cwd: root,
     env: {
       ...process.env,
@@ -245,7 +245,7 @@ test('MCP receives scoped DSH reports while the task runs and can recover them a
     const url = `http://127.0.0.1:${server.address().port}/dsh-relay`
     firstClient = startMcp(url, directory, token)
     const initialized = await firstClient.rpc('initialize', {})
-    assert.equal(initialized.result.serverInfo.name, 'dsh-mcp-relay')
+    assert.equal(initialized.result.serverInfo.name, 'DSH_MCP')
     const listed = await firstClient.rpc('tools/list', {})
     assert.ok(listed.result.tools.some((tool) => tool.name === 'dsh_delegate'))
 

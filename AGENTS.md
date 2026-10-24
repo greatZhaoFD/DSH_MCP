@@ -1,4 +1,4 @@
-# DSH Relay Subagent Reporting
+# DSH_MCP Subagent Reporting
 
 When acting as a Codex-coordinated DSH subagent and `report_to_codex` is available, use it for useful milestones, long-running job startup (include its handle/path), material findings, blockers, required decisions, and replies to coordinator questions. Keep messages concise and include `replyTo` when provided. A successful acknowledgement means the plugin saved the report; it does not prove Codex read or approved it. Continue authorized independent work after reporting, pausing only work that requires a decision or permission. Do not send repetitive heartbeat or per-step reports. Finish normally; reporting does not conclude the task. If the tool is unavailable, disclose this through the normal response instead of claiming delivery.
 

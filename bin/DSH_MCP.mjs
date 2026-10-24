@@ -5,7 +5,7 @@ import { taskStatus } from '../lib/turn-status.js'
  *
  * Relays the Model Context Protocol (stdio, newline-delimited JSON-RPC) to the
  * in-process DSH host relay (HTTP). The relay is mounted by the
- * dsh-mcp-relay Cordis plugin inside the *running* DSH instance, so everything
+ * DSH_MCP Cordis plugin inside the *running* DSH instance, so everything
  * this server drives is the same live runtime the Web GUI is attached to.
  *
  * stdout carries protocol frames only; all diagnostics go to stderr.
@@ -59,7 +59,7 @@ const SURFACE = buildSurface({
   timeoutMs: DEFAULT_TIMEOUT_MS,
 })
 
-const log = (...parts) => process.stderr.write(`[dsh-mcp-relay] ${parts.join(' ')}\n`)
+const log = (...parts) => process.stderr.write(`[DSH_MCP] ${parts.join(' ')}\n`)
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 const relay = createRelayClient({
@@ -312,7 +312,7 @@ async function handleRequest(method, params) {
       return {
         protocolVersion: (params && params.protocolVersion) || '2024-11-05',
         capabilities: { tools: {} },
-        serverInfo: { name: 'dsh-mcp-relay', version: '0.7.0-mailbox.1' },
+        serverInfo: { name: 'DSH_MCP', version: '0.7.0-mailbox.1' },
         // Injected into the client's context at handshake time, so the caller
         // learns the delegation model and the waiting contract without any
         // manual setup on the user's side.

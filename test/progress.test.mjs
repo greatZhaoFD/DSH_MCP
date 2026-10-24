@@ -22,7 +22,7 @@ const server = createServer((req, res) => {
   }
 })
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve))
-const child = spawn(process.execPath, ['bin/dsh-mcp-relay.mjs'], {
+const child = spawn(process.execPath, ['bin/DSH_MCP.mjs'], {
   cwd: new URL('..', import.meta.url),
   env: { ...process.env, DSH_RELAY_URL: `http://127.0.0.1:${server.address().port}`,
     DSH_RELAY_CONNECTION_FILE: '', DSH_RELAY_POLL_MS: '5' },

@@ -6,7 +6,7 @@
 
 | 位置 | 注册内容 | 当前由谁完成 |
 | --- | --- | --- |
-| Codex MCP 客户端 | 名为 `dsh` 的 MCP 服务，暴露7个 `dsh_*` 工具 | Codex 配置启动 `bin/dsh-mcp-relay.mjs`，服务自动公布工具面。 |
+| Codex MCP 客户端 | 名为 `DSH_MCP` 的 MCP 服务，暴露7个 `dsh_*` 工具 | Codex 配置启动 `bin/DSH_MCP.mjs`，服务自动公布工具面。 |
 | DSH 模型工具目录 | `report_to_codex` | Host 插件对 Relay 管理的代理作用域自动注册，不给普通独立会话额外注册。 |
 | DSH `AGENTS.md` | 何时汇报、汇报后如何继续工作 | 指导模型行为，不负责创建或注册工具。 |
 | Codex `AGENTS.md` | 如何委派、读取报告、发插话及处理失败 | 指导主模型协调，不把插件消息变成原生邮箱消息。 |

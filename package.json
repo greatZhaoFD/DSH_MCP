@@ -1,11 +1,11 @@
 {
-  "name": "dsh-mcp-relay",
+  "name": "dsh_mcp",
   "version": "0.7.0-mailbox.1",
   "description": "Expose a running DeepSeek Harness instance over MCP, so an external agent can list, delegate to, and answer questions in that instance's own sessions.",
   "type": "module",
   "main": "lib/index.js",
   "bin": {
-    "dsh-mcp-relay": "bin/dsh-mcp-relay.mjs"
+    "dsh_mcp": "bin/DSH_MCP.mjs"
   },
   "exports": {
     ".": "./lib/index.js",
@@ -14,7 +14,7 @@
     "./client": "./lib/client.js"
   },
   "files": [
-    "bin/dsh-mcp-relay.mjs",
+    "bin/DSH_MCP.mjs",
     "bin/relay-client.mjs",
     "bin/surface.mjs",
     "bin/surface.full.mjs",
@@ -58,13 +58,14 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/greatZhaoFD/dsh-mcp-relay.git"
+    "url": "git+https://github.com/greatZhaoFD/DSH_MCP.git"
   },
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://github.com/greatZhaoFD/dsh-mcp-relay#readme",
+  "homepage": "https://github.com/greatZhaoFD/DSH_MCP#readme",
   "bugs": {
-    "url": "https://github.com/greatZhaoFD/dsh-mcp-relay/issues"
-  }
+    "url": "https://github.com/greatZhaoFD/DSH_MCP/issues"
+  },
+  "displayName": "DSH_MCP"
 }

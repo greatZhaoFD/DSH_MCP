@@ -1,4 +1,4 @@
-# dsh-mcp-relay bundle patch: inserts this plugin into a profile's layer stack.
+# DSH_MCP bundle patch: inserts this plugin into a profile's layer stack.
 # Applied when a profile lists this bundle. The row references the package by
 # name so Node resolution finds the installed code.
 #
@@ -8,8 +8,8 @@
 # that guard exists to tolerate a missing deployment, not to report one. Naming
 # both services here makes Cordis wait until they are available.
 - insert:
-    - id: dsh-mcp-relay
-      name: 'dsh-mcp-relay'
+    - id: DSH_MCP
+      name: 'dsh_mcp'
       inject: [webServer, sessionController, agents, llm, workspaceRegistry]
       config:
         sessionMode: workspace

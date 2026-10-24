@@ -11,12 +11,12 @@
 ## 1. Get the source
 
 ```sh
-git clone https://github.com/greatZhaoFD/dsh-mcp-relay.git
-cd dsh-mcp-relay
+git clone https://github.com/greatZhaoFD/DSH_MCP.git
+cd DSH_MCP
 npm test
 ```
 
-Choose a stable absolute source directory. Windows examples below use `D:/plugins/dsh-mcp-relay`; replace that with your actual path on each computer.
+Choose a stable absolute source directory. Windows examples below use `D:/plugins/DSH_MCP`; replace that with your actual path on each computer.
 
 ## 2. Enable the DSH host end
 
@@ -25,11 +25,11 @@ Close DSH before editing its profile. In your active profile's `package.json`, m
 ```json
 {
   "dependencies": {
-    "dsh-mcp-relay": "link:D:/plugins/dsh-mcp-relay"
+    "dsh_mcp": "link:D:/plugins/DSH_MCP"
   },
   "dsh": {
     "profile": {
-      "bundles": ["dsh-mcp-relay"]
+      "bundles": ["dsh_mcp"]
     }
   }
 }
@@ -44,13 +44,13 @@ The bundle patch waits for `webServer`, `sessionController`, `agents`, `llm`, an
 Merge the following into Codex's user configuration, replacing both paths:
 
 ```toml
-[mcp_servers.dsh]
+[mcp_servers.DSH_MCP]
 command = "node"
-args = ["D:/plugins/dsh-mcp-relay/bin/dsh-mcp-relay.mjs"]
+args = ["D:/plugins/DSH_MCP/bin/DSH_MCP.mjs"]
 startup_timeout_sec = 60
 tool_timeout_sec = 900
 
-[mcp_servers.dsh.env]
+[mcp_servers.DSH_MCP.env]
 DSH_RELAY_CONNECTION_FILE = "C:/Users/<you>/.dsh/dsh-mcp-relay/connection.json"
 ```
 
@@ -68,3 +68,9 @@ If Node.js is not on the app's PATH, set `command` to its full executable path. 
 Do not commit connection tokens, native session logs, report mailbox files, model preferences, or personal global AGENTS/config files. Agent behavior examples in AGENT-SETUP.md are optional component-specific guidance to merge after review; each computer's personal global design is maintained separately.
 
 See README.md / README.zh.md for the workflow and AGENT-SETUP.md for tool registration and optional agent guidance. The upstream Nigheart MIT copyright is retained in LICENSE.
+
+## Naming and compatibility
+
+Repository, checkout folder, MCP server name, and settings UI use `DSH_MCP`. The npm dependency/bundle and CLI package identifier use lowercase `dsh_mcp`, as required for npm package names. This project is one Codex MCP server plus one DSH host bundle; it is not a separate Codex desktop plugin.
+
+Existing `/dsh-relay` routes, `x-dsh-relay-*` headers, `DSH_RELAY_*` environment variables, `dsh_*` tools and `~/.dsh/dsh-mcp-relay` state directory remain compatible. Keep the existing state directory: it contains task/session aliases and report history. When upgrading, remove the old `dsh-mcp-relay` profile dependency and bundle and replace them with `dsh_mcp`; update the Codex MCP table from `dsh` to `DSH_MCP` rather than enabling both.

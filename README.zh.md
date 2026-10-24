@@ -1,4 +1,4 @@
-# dsh-mcp-relay
+# DSH_MCP
 
 [English](README.md) | [简体中文](README.zh.md) | [本机部署与验证](LOCAL-INSTALL.md) | [工具注册与双端提示词](AGENT-SETUP.md)
 
@@ -8,7 +8,7 @@
 
 ## 同一个项目的两个端
 
-- **Codex MCP 端**：`bin/dsh-mcp-relay.mjs`、HTTP 客户端及工具定义，配置为 stdio MCP 服务。
+- **Codex MCP 端**：`bin/DSH_MCP.mjs`、HTTP 客户端及工具定义，配置为 stdio MCP 服务。
 - **DSH 插件端**：`lib/index.js`、`lib/client.js`、`cordis.patch.yml`，提供本机中继和原生界面接入。
 - **DSH 本地注册工具**：`lib/reporting.js` 提供 `report_to_codex`，由同一 Host 插件为 Relay 管理的会话注册；不用另建仓库或手动复制工具。
 
@@ -29,7 +29,7 @@
 
 ### 查看双向通信记录
 
-在设置 → MCP Relay 点击“打开对话”旁的“通信记录”，直接在 VS Code 打开一次性的临时 Markdown 快照，不在插件页面展示或导出正文。快照包含 Relay 下发的任务/追问、DSH 中间与最终文本回复、已保存的 report_to_codex 报告；系统提示词、规则与运行环境暂时保留并标注来源。工具调用、工具返回、模型内部推理不显示。
+在设置 → DSH_MCP 点击“打开对话”旁的“通信记录”，直接在 VS Code 打开一次性的临时 Markdown 快照，不在插件页面展示或导出正文。快照包含 Relay 下发的任务/追问、DSH 中间与最终文本回复、已保存的 report_to_codex 报告；系统提示词、规则与运行环境暂时保留并标注来源。工具调用、工具返回、模型内部推理不显示。
 
 读取当时的原生日志和报告邮箱，不实时刷新，不生成额外 JSON 副本。VS Code 通过 --wait 等待这份 Markdown 标签页关闭，然后删除临时 MD 和专用空目录；不要求退出整个 VS Code。关闭不会改变任何 DSH 任务。原始压缩 JSONL 日志与 reports/*.json 保留，因为后台报告仍以此持久化。
 
@@ -39,7 +39,7 @@
 Codex 主模型
   │ 调用 dsh_delegate / dsh_poll 等 MCP 工具
   ▼
-bin/dsh-mcp-relay.mjs：独立 stdio MCP 进程
+bin/DSH_MCP.mjs：独立 stdio MCP 进程
   │ 经过回环 HTTP 和 token 鉴权
   ▼
 lib/index.js：DSH 进程内的 Cordis 插件
@@ -61,20 +61,20 @@ lib/index.js：DSH 进程内的 Cordis 插件
 
 需要可运行本插件的 DSH 桌面端或 Web profile，以及同机的 Node.js 和 stdio MCP 客户端。包声明 Node.js `>=18`；本机验证使用 Node.js 24.18.0。DSH 内部服务接口可能随版本变化，应以实际注册工具和集成测试为准。
 
-从 `https://github.com/greatZhaoFD/dsh-mcp-relay` 克隆项目到自选目录；下例以 `D:\plugins\dsh-mcp-relay` 为例。DSH profile 通过 `link:` 引用该目录，Codex MCP 入口也指向同一份源码。双端安装步骤见 [安装说明](LOCAL-INSTALL.md)。
+从 `https://github.com/greatZhaoFD/DSH_MCP` 克隆项目到自选目录；下例以 `D:\plugins\DSH_MCP` 为例。DSH profile 通过 `link:` 引用该目录，Codex MCP 入口也指向同一份源码。双端安装步骤见 [安装说明](LOCAL-INSTALL.md)。
 
 保留 `cordis.patch.yml` 中的依赖与 `sessionMode: workspace` 配置；当前 bundle 依赖 `webServer`、`sessionController`、`agents`、`llm`、`workspaceRegistry`。
 
 Codex 的配置示例（替换为实际绝对路径）：
 
 ```toml
-[mcp_servers.dsh]
+[mcp_servers.DSH_MCP]
 command = "node"
-args = ["D:/plugins/dsh-mcp-relay/bin/dsh-mcp-relay.mjs"]
+args = ["D:/plugins/DSH_MCP/bin/DSH_MCP.mjs"]
 startup_timeout_sec = 60
 tool_timeout_sec = 900
 
-[mcp_servers.dsh.env]
+[mcp_servers.DSH_MCP.env]
 DSH_RELAY_CONNECTION_FILE = "C:/Users/<you>/.dsh/dsh-mcp-relay/connection.json"
 ```
 

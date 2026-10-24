@@ -118,7 +118,7 @@ const cases = []
 const test = (label, fn) => cases.push([label, fn])
 
 test('exports the relay identity', () => {
-  assert.equal(name, 'dsh-mcp-relay')
+  assert.equal(name, 'DSH_MCP')
   assert.deepEqual(inject, ['webServer', 'sessionController'])
 })
 
